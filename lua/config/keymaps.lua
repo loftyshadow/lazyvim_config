@@ -7,13 +7,15 @@ local mappings = {
   { from = "jk", to = "<Esc>", mode = "i" },
   -- ctrl + s map to save
   { from = "<C-s>", to = "<Esc>:w<CR>", mode = "i" },
+  -- add a new line
+  { from = "<A-o>", to = "<Esc>o", mode = "i" },
+  -- append at end
+  { from = "<A-a>", to = "<Esc>A", mode = "i" },
 
   -----------------view mode---------------
   -- move mulite lines
-  { from = "J", to = ">+1<CR>gv=gv", mode = "v" },
-  { from = "K", to = "<-2<CR>gv=gv", mode = "v" },
-  -- x do not yank
-  { from = "x", to = "_x", mode = "v" },
+  { from = "<A-S-j>", to = ":m '>+1<CR>gv=gv", mode = "v" },
+  { from = "<A-S-k>", to = ":m '<-2<CR>gv=gv", mode = "v" },
 
   -----------------normal mode -----------------
   -- cancel highlight
@@ -25,8 +27,8 @@ local mappings = {
 }
 
 local option = {
-  noremap = ture,
-  silent = ture,
+  noremap = true,
+  silent = true,
 }
 
 for _, mapping in ipairs(mappings) do
