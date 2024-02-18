@@ -1,36 +1,30 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-local mappings = {
-  ----------------insert mode--------------
-  -- jk map to <Esc>
-  { from = "jk", to = "<Esc>", mode = "i" },
-  -- ctrl + s map to save
-  { from = "<C-s>", to = "<Esc>:w<CR>", mode = "i" },
-  -- add a new line
-  { from = "<A-o>", to = "<Esc>o", mode = "i" },
-  -- append at end
-  { from = "<A-a>", to = "<Esc>A", mode = "i" },
+local keymap = vim.keymap
 
-  -----------------view mode---------------
-  -- move mulite lines
-  { from = "<A-S-j>", to = ":m '>+1<CR>gv=gv", mode = "v" },
-  { from = "<A-S-k>", to = ":m '<-2<CR>gv=gv", mode = "v" },
+-- ---------- 插入模式 ---------- ---
+keymap.set("i", "jk", "<ESC>")
+keymap.set("i", "<A-a>", "<ESC>A")
+keymap.set("i", "<A-o>", "<ESC>o")
 
-  -----------------normal mode -----------------
-  -- cancel highlight
-  { from = "<leader>nh", to = ":nohl<CR>", mode = "n" },
-  -- save
-  { from = "<C-s>", to = ":w<CR>", mode = "n" },
-  -- select all
-  { from = "<C-a>", to = "ggVG", mode = "n" },
-}
+-- ---------- 视觉模式 ---------- ---
+-- 单行或多行移动
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- x do not yank
+keymap.set("v", "x", "_x")
 
-local option = {
-  noremap = true,
-  silent = true,
-}
+-- ---------- 正常模式 ---------- ---
+keymap.set("n", "J", "5j")
+keymap.set("n", "K", "5k")
 
-for _, mapping in ipairs(mappings) do
-  vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, mapping.option or option)
-end
+-- 取消高亮
+keymap.set("n", "<leader>nh", ":nohl<CR>")
+
+--  保存
+keymap.set({ "n", "i" }, "<C-s>", "<Esc>:w<cr>")
+-- select all
+keymap.set("n", "<C-a>", "ggVG")
+
+keymap.set("n", "G", "Gzz")
