@@ -1,13 +1,14 @@
 return {
   "akinsho/toggleterm.nvim",
   opts = {
+    size = 60,
     open_mapping = [[<leader>tt]],
     start_in_start = true,
-    direction = "float",
+    direction = "vertical",
     float_opts = {
       border = "curved",
-      width = "80%",
-      height = "30%",
+      width = 130,
+      height = 30,
     },
   },
 }
